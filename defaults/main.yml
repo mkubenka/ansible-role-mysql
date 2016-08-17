@@ -1,0 +1,41 @@
+---
+
+mysql_version: '5.7'
+
+mysql_root_password: ''
+
+mysql_import_timezones: true
+mysql_bind_address: 127.0.0.1
+
+mysql_server_options:
+  ## Memory usage
+  'table_open_cache': '64'
+  'key_buffer_size': '16M'
+  'innodb_buffer_pool_size': '16M'
+  'thread_cache_size': '8'
+  'ft_min_word_len': '3'
+
+  'innodb_log_file_size': '5M'
+  'innodb_log_buffer_size': '8M'
+  'innodb_flush_log_at_trx_commit': '1'
+  'innodb_lock_wait_timeout': '50'
+
+  ## Limitations
+  'max_connections': '100'
+  'max_connect_errors': '100'
+  'long_query_time': '5'
+  'max_tmp_tables': '40'
+  'wait_timeout': '100'
+  'interactive_timeout': '900'
+  'connect_timeout': '4'
+  'max_allowed_packet': '2MB'
+
+  ## Query cache
+  'query_cache_limit': '2M'
+  'query_cache_size': '32M'
+  'query_prealloc_size': '10M'
+
+mysql_users: []
+
+mysql_slaves_hosts: []
+mysql_slave_password: ''

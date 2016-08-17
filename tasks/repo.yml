@@ -1,0 +1,33 @@
+---
+
+- name: import GPG key
+  rpm_key:
+    key: http://dev.mysql.com/doc/refman/5.7/en/checking-gpg-signature.html
+    state: present
+
+- name: connectors repo
+  yum_repository:
+    name: mysql-connectors-community
+    file: mysql-community
+    description: MySQL Connectors Community
+    baseurl: http://repo.mysql.com/yum/mysql-connectors-community/el/{{ mysql_dist }}/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: tools repo
+  yum_repository:
+    name: mysql-tools-community
+    file: mysql-community
+    description: MySQL Tools Community
+    baseurl: http://repo.mysql.com/yum/mysql-tools-community/el/{{ mysql_dist }}/$basearch/
+    gpgcheck: yes
+    enabled: yes
+
+- name: server repo
+  yum_repository:
+    name: mysql-{{ mysql_version }}-community
+    file: mysql-community
+    description: MySQL {{ mysql_version }} Community Server
+    baseurl: http://repo.mysql.com/yum/mysql-{{ mysql_version }}-community/el/{{ mysql_dist }}/$basearch/
+    gpgcheck: yes
+    enabled: yes

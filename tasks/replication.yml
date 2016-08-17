@@ -1,0 +1,10 @@
+---
+
+- name: setup replication users
+  mysql_user:
+    user="repl"
+    host="{{ item }}"
+    password="{{ mysql_slave_password }}"
+    priv="*.*:REPLICATION SLAVE"
+  with_items: "{{ mysql_slaves_hosts }}"
+  when: mysql_slaves_hosts and mysql_slave_password

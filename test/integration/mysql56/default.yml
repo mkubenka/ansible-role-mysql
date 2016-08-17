@@ -1,0 +1,24 @@
+---
+
+- hosts: all
+
+  vars:
+    mysql_version: '5.6'
+    mysql_root_password: 'CorrectHorseBatteryStaple1$'
+
+  pre_tasks:
+    - name: do not requires a TTY when using sudo
+      copy:
+        content="Defaults !requiretty\n"
+        dest="/etc/sudoers.d/cloud-init-requiretty"
+        mode=0400
+        validate="visudo -cf %s"
+
+    - name: remove SSH user from all groups
+      user:
+        name="{{ ansible_env.SUDO_USER }}"
+        groups=""
+
+  roles:
+    - role: mysql
+

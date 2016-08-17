@@ -1,0 +1,7 @@
+---
+
+- name: checking that required variables are set
+  fail: msg="{{ item }} is not defined"
+  when: not {{ item }}
+  with_items:
+    - mysql_root_password

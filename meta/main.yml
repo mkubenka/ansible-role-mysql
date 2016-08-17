@@ -1,0 +1,20 @@
+---
+
+galaxy_info:
+  author: Michal Kubenka
+  description: MySQL Role.
+  company: SAGES, s.r.o.
+  license: BSD
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Amazon
+      versions:
+        - all
+  galaxy_tags:
+    - database
+
+dependencies: []

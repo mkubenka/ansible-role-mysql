@@ -1,0 +1,42 @@
+# Defines Docker image suitable for testing cookbooks on CentOS 7.
+#
+# This handles a number of idiosyncrasies with systemd so it can be
+# run as the root process of the container, making it behave like a
+# normal VM but without the overhead.
+# https://medium.com/brigade-engineering/reduce-chef-infrastructure-integration-test-times-by-75-with-test-kitchen-and-docker-bf638ab95a0a#.qcnmutao9
+
+FROM centos:7
+
+ENV container docker
+
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+    rm -f /lib/systemd/system/multi-user.target.wants/*;\
+    rm -f /etc/systemd/system/*.wants/*;\
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*;\
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+RUN yum clean all
+RUN yum install -y sudo openssh-server openssh-clients which curl
+RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+RUN ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+RUN echo 'OPTIONS="-o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes"' >> /etc/sysconfig/sshd
+RUN systemctl enable sshd.service
+
+RUN if ! getent passwd <%= @username %>; then \
+    useradd -d /home/<%= @username %> -m -s /bin/bash <%= @username %>; \
+  fi
+RUN echo <%= "#{@username}:#{@password}" %> | chpasswd
+RUN echo '<%= @username %> ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo "Defaults !requiretty" >> /etc/sudoers
+RUN mkdir -p /home/<%= @username %>/.ssh
+RUN chown -R <%= @username %> /home/<%= @username %>/.ssh
+RUN chmod 0700 /home/<%= @username %>/.ssh
+RUN touch /home/<%= @username %>/.ssh/authorized_keys
+RUN chown <%= @username %> /home/<%= @username %>/.ssh/authorized_keys
+RUN chmod 0600 /home/<%= @username %>/.ssh/authorized_keys
+RUN echo '<%= IO.read(@public_key).strip %>' >> /home/<%= @username %>/.ssh/authorized_keys
+
+VOLUME ["/sys/fs/cgroup"]
