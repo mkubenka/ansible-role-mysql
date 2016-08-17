@@ -1,4 +1,4 @@
-# Ansible Role MySQL [![Build Status](https://travis-ci.org/mkubenka/ansible-role-mysql.svg?branch=master)](https://travis-ci.org/mkubenka/ansible-role-mysql)
+# Ansible Role MySQL [![Build Status](https://travis-ci.org/mkubenka/ansible-role-mysql.svg?branch=master)](https://travis-ci.org/mkubenka/ansible-role-mysql) [![Ansible Role](https://img.shields.io/ansible/role/11572.svg?maxAge=2592000)](https://galaxy.ansible.com/mkubenka/mysql/)
 
 MySQL is an open-source relational database management system (RDBMS). This role use [MySQL Community Yum repository](https://dev.mysql.com/downloads/repo/yum/).
 
