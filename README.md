@@ -15,7 +15,7 @@ them are as follows. (For all variables, take a look at [defaults/main.yml](defa
 
 ```yaml
 
-# Supported versions 5.5, 5.6 and 5.7
+# Supported versions 5.5, 5.6, 5.7 and 8.0
 mysql_version: '5.7'
 
 # Required variable.

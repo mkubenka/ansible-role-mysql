@@ -51,3 +51,4 @@ suites:
   - name: mysql55
   - name: mysql56
   - name: mysql57
+  - name: mysql80
