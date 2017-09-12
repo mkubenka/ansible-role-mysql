@@ -4,7 +4,7 @@ require 'kitchen/driver/docker'
 
 module Kitchen
   module Driver
-    class Docker < Kitchen::Driver::SSHBase
+    class Docker < Kitchen::Driver::Base
       def rm_container(state)
         container_id = state[:container_id]
         if defined? instance.provisioner[:attributes][:systemd]
