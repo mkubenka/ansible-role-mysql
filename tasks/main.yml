@@ -30,7 +30,7 @@
   when: ansible_distribution == 'Amazon'
 
 - name: install Python interface to MySQL
-  pip: name=MySQL state=present
+  pip: name=mysqlclient state=present
   when: ansible_distribution == 'Amazon'
 
 - name: copy my.cnf
