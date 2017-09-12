@@ -25,6 +25,7 @@ mysql_import_timezones: true
 
 mysql_bind_address: 127.0.0.1
 
+# You can use https://tools.percona.com/wizard.
 mysql_server_options:
   ## Memory usage
   'table_open_cache': '64'
