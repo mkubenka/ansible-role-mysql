@@ -11,12 +11,16 @@ env:
   matrix:
     - INSTANCE=mysql55-centos-6
     - INSTANCE=mysql55-centos-7
+    - INSTANCE=mysql55-amazon
     - INSTANCE=mysql56-centos-6
     - INSTANCE=mysql56-centos-7
+    - INSTANCE=mysql56-amazon
     - INSTANCE=mysql57-centos-6
     - INSTANCE=mysql57-centos-7
+    - INSTANCE=mysql57-amazon
     - INSTANCE=mysql80-centos-6
     - INSTANCE=mysql80-centos-7
+    - INSTANCE=mysql80-amazon
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889

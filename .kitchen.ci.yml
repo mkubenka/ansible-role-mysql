@@ -32,8 +32,10 @@ platforms:
       run_command: /usr/sbin/init # Start systemd as root process
     attributes:
       systemd: true
-
-suites:
-  - name: mysql55
-  - name: mysql56
-  - name: mysql57
+  - name: amazon
+    driver_config:
+      image: amazonlinux:latest
+      platform: rhel
+    provisioner:
+      ansible_platform: "amazon"
+      enable_yum_epel: true
