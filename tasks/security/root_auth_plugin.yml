@@ -7,14 +7,14 @@
   command: mysql -NBe "DESCRIBE mysql.user plugin"
   register: mysql_check_new_auth
   changed_when: false
-  always_run: yes
+  check_mode: no
   when: "{{ mysql_root_password != '' }}"
 
 - name: check auth plugin of root user
   command: mysql -NBe "SELECT plugin FROM mysql.user WHERE User = 'root' AND plugin != 'mysql_native_password'"
   register: mysql_check_root_auth_plugin
   changed_when: false
-  always_run: yes
+  check_mode: no
   when: "{{ mysql_root_password != '' }} and {{ mysql_check_new_auth.stdout != '' }}"
 
 - name: ensure root user has password set using mysql_native_password
