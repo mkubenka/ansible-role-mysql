@@ -41,7 +41,7 @@ platforms:
     driver:
       image_search:
         owner-alias: "amazon"
-        name: amzn-ami*2016.03*gp2
+        name: amzn-ami*2017.03*gp2
     transport:
       username: ec2-user
     provisioner:
