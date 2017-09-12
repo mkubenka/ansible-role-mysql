@@ -19,6 +19,11 @@
         name="{{ ansible_env.SUDO_USER }}"
         groups=""
 
+    - name: ensure /etc/sysconfig/network exists
+      file:
+        path: /etc/sysconfig/network
+        state: touch
+
   roles:
     - role: mysql
 
